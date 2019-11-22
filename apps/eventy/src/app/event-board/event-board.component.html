@@ -1,0 +1,108 @@
+<mat-toolbar color="primary" fxLayout="row">
+  <span>Eventy</span>
+  <span fxFlex="1 1 auto"></span>
+  <span>
+    <button mat-button [matMenuTriggerFor]="menu">{{ username() }}</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="refresh()">Refresh</button>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </span>
+</mat-toolbar>
+
+<div
+  class="tab-height"
+  fxLayout="column"
+  fxLayoutAlign="start center"
+  fxLayoutGap="10px"
+>
+  <mat-tab-group
+    mat-stretch-tabs
+    [color]="'primary'"
+    class="full-width tab-height"
+  >
+    <mat-tab label="My Events">
+      <ng-scrollbar [track]="'horizontal'" [visibility]="'hover'">
+        <mat-list
+          class="full-height pad-bot"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="10px"
+        >
+          <mat-list-item *ngFor="let event of myEvents">
+            <mat-card>
+              <mat-card-header
+                fxLayout="column"
+                fxLayoutAlign="start start"
+                fxLayoutGap="10px"
+              >
+                <mat-card-title>{{ event.name }}</mat-card-title>
+                <mat-card-subtitle>{{ event.venue }}</mat-card-subtitle>
+                <mat-card-subtitle>{{
+                  event.date | date: 'fullDate'
+                }}</mat-card-subtitle>
+              </mat-card-header>
+              <img src="{{ event.imgURL }}" />
+              <mat-card-content>
+                <p>
+                  {{ event.description }}
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button color="primary" mat-button>SAVE</button>
+                <button color="primary" mat-button>SHARE</button>
+              </mat-card-actions>
+            </mat-card>
+          </mat-list-item>
+        </mat-list>
+      </ng-scrollbar>
+    </mat-tab>
+    <mat-tab label="Other Events">
+      <ng-scrollbar [track]="'horizontal'" [visibility]="'hover'">
+        <mat-list
+          class="full-height pad-bot"
+          fxLayout="row"
+          fxLayoutAlign="start center"
+          fxLayoutGap="10px"
+        >
+          <mat-list-item *ngFor="let event of otherEvents">
+            <mat-card>
+              <mat-card-header
+                fxLayout="column"
+                fxLayoutAlign="start start"
+                fxLayoutGap="10px"
+              >
+                <mat-card-title>{{ event.name }}</mat-card-title>
+                <mat-card-subtitle>{{ event.email }}</mat-card-subtitle>
+                <mat-card-subtitle>{{ event.venue }}</mat-card-subtitle>
+                <mat-card-subtitle>{{
+                  event.date | date: 'fullDate'
+                }}</mat-card-subtitle>
+              </mat-card-header>
+              <img src="{{ event.imgURL }}" />
+              <mat-card-content>
+                <p>
+                  {{ event.description }}
+                </p>
+              </mat-card-content>
+              <mat-card-actions>
+                <button color="primary" mat-button>SAVE</button>
+                <button color="primary" mat-button>SHARE</button>
+              </mat-card-actions>
+            </mat-card>
+          </mat-list-item>
+        </mat-list>
+      </ng-scrollbar>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<button
+  matTooltip="Add new event"
+  mat-fab
+  color="primary"
+  class="float"
+  (click)="addEvent()"
+>
+  <mat-icon>add</mat-icon>
+</button>

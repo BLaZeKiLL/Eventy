@@ -1,0 +1,54 @@
+<form fxLayout="column" [formGroup]="eventForm" (submit)="addEvent()">
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field>
+      <input
+        type="text"
+        matInput
+        placeholder="Name"
+        formControlName="name"/>
+      <mat-error>Missing name</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input 
+        matInput 
+        [matDatepicker]="picker" 
+        placeholder="Choose a date"
+        formControlName="date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Venue"
+      formControlName="venue"/>
+    <mat-error>Missing venue</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      type="text"
+      matInput
+      placeholder="Image URL"
+      formControlName="imgURL"/>
+    <mat-error>Missing image url</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea 
+      matInput 
+      placeholder="Description"
+      formControlName="description">
+    </textarea>
+    <mat-error>Missing description</mat-error>
+  </mat-form-field>
+  <div fxLayout="row" fxLayoutAlign="center center">
+      <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="eventForm.invalid">
+      Add Event
+    </button>
+  </div>
+</form>

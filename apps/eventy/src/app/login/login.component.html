@@ -1,0 +1,64 @@
+<section fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+  <mat-card>
+    <mat-card-header fxLayoutAlign="center center">
+      <mat-card-title>Eventy</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form fxLayout="column" [formGroup]="loginForm">
+        <mat-form-field>
+          <input
+            type="email"
+            matInput
+            placeholder="Email"
+            formControlName="email"
+          />
+          <mat-error>Invalid or missing email.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input
+            type="password"
+            matInput
+            placeholder="Password"
+            formControlName="password"
+            [type]="hide ? 'password' : 'text'"
+          />
+          <mat-icon class="icon" matSuffix (click)="hide = !hide">{{
+            hide ? 'visibility_off' : 'visibility'
+          }}</mat-icon>
+          <mat-error>Missing password.</mat-error>
+        </mat-form-field>
+        <div *ngIf="!authenticationFlag" class="incorrectCredentials">
+          Username or password is incorrect.
+        </div>
+
+        <mat-checkbox formControlName="keep" color="primary">
+          Keep me signed in
+        </mat-checkbox>
+
+        <div fxLayout="row">
+          <button
+            type="submit"
+            mat-raised-button
+            color="primary"
+            (click)="login()"
+            matTooltip="login as an existing user"
+            [disabled]="loginForm.invalid">
+            Login
+          </button>
+          <mat-divider [vertical]="true"></mat-divider>
+          <button 
+            type="submit" 
+            mat-raised-button 
+            color="primary"
+            (click)="signup()"
+            matTooltip="sign up as a new user"
+            [disabled]="loginForm.invalid">
+            Sign Up
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>
