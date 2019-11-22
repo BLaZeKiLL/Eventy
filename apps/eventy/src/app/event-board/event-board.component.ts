@@ -45,7 +45,7 @@ export class EventBoardComponent {
   addEvent() {
     const dialogRef = this.dialog.open(AddEventComponent);
     dialogRef.afterClosed().subscribe((newEvent) => {
-      if (newEvent) {
+      if (newEvent.name) {
         this.event.addEvent(newEvent)
           .subscribe((response) => {
             let msg = '';
