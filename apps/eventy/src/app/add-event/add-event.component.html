@@ -43,12 +43,18 @@
     <mat-error>Missing description</mat-error>
   </mat-form-field>
   <div fxLayout="row" fxLayoutAlign="center center">
-      <button
+    <button
       type="submit"
       mat-raised-button
       color="primary"
       [disabled]="eventForm.invalid">
       Add Event
+    </button>
+    <button
+      (click)="close()"
+      mat-raised-button
+      color="primary">
+      Close
     </button>
   </div>
 </form>

@@ -29,4 +29,8 @@ export class AddEventComponent implements OnInit {
     this.dialogRef.close(this.eventForm.value);
   }
 
+  close() {
+    this.dialogRef.close();
+  }
+
 }

@@ -45,18 +45,20 @@ export class EventBoardComponent {
   addEvent() {
     const dialogRef = this.dialog.open(AddEventComponent);
     dialogRef.afterClosed().subscribe((newEvent) => {
-      this.event.addEvent(newEvent)
-        .subscribe((response) => {
-          let msg = '';
-          if (response) {
-            msg = 'Event added';
-            this.event.loadMyEvents();
-          }
-          else msg = 'Event not added';
-          this.toast.open(msg, '', {
-            duration: 1000
+      if (newEvent) {
+        this.event.addEvent(newEvent)
+          .subscribe((response) => {
+            let msg = '';
+            if (response) {
+              msg = 'Event added';
+              this.event.loadMyEvents();
+            }
+            else msg = 'Event not added';
+            this.toast.open(msg, '', {
+              duration: 1000
+            });
           });
-        })
+      }
     })
   }
 
