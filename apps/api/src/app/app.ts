@@ -8,6 +8,7 @@ import { User } from './models/user.model';
 import { authRouter } from './routes/auth.route';
 import { eventRouter } from './routes/event.route';
 import { indexRouter } from './routes/index.route';
+import * as path from "path";
 
 export class App {
   private app: Express;
