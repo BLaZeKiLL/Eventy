@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class EventService {
   }
 
   public addEvent(event: IEvent): Observable<boolean> {
-    return this.http.post<any>('/api/event/add', {
+    return this.http.post<any>(environment.api + '/event/add', {
       event: event,
       userid: this.auth.User.id
     }, {
@@ -43,7 +44,7 @@ export class EventService {
   }
 
   public loadMyEvents() {
-    this.http.post<any>('/api/event/myevents', {
+    this.http.post<any>(environment.api + '/event/myevents', {
       userid: this.auth.User.id
     }, {
       headers: {
@@ -56,7 +57,7 @@ export class EventService {
   }
 
   public loadOtherEvents() {
-    this.http.post<any>('/api/event/otherevents', {
+    this.http.post<any>(environment.api + '/event/otherevents', {
       userid: this.auth.User.id
     }, {
       headers: {

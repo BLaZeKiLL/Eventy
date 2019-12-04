@@ -75,7 +75,7 @@ export class Log {
       transports: [
         new transports.File({
           level: 'verbose',
-          filename: `${__dirname}/../Logs/main.log`,
+          filename: `${__dirname}/Logs/main.log`,
           handleExceptions: true,
           maxsize: 5242880, // 5MB
           maxFiles: 5,
@@ -94,7 +94,7 @@ export class Log {
       transports: [
         new transports.File({
           level: 'info',
-          filename: '${__dirname}/../Logs/morgan.log',
+          filename: `${__dirname}/Logs/morgan.log`,
           handleExceptions: true,
           maxsize: 5242880, // 5MB
           maxFiles: 5,

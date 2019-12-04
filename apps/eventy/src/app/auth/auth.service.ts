@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { IUser } from '../model/user.model';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class AuthService {
   ) { }
 
   public login(email: string, password: string): Observable<boolean> {
-    return this.http.post<any>('/api/auth/login', {email: email, password: password})
+    return this.http.post<any>(environment.api + '/auth/login', {email: email, password: password})
       .pipe(
         map((response) => {
           if (response.message) return false;
@@ -31,7 +32,7 @@ export class AuthService {
   }
 
   public signup(email: string, password: string): Observable<boolean> {
-    return this.http.post<any>('/api/auth/signup', {email: email, password: password})
+    return this.http.post<any>(environment.api + '/auth/signup', {email: email, password: password})
       .pipe(
         map((response) => {
           if (response.message) return false;

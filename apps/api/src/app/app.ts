@@ -7,6 +7,7 @@ import { User } from './models/user.model';
 
 import { authRouter } from './routes/auth.route';
 import { eventRouter } from './routes/event.route';
+import { indexRouter } from './routes/index.route';
 
 export class App {
   private app: Express;
@@ -16,6 +17,7 @@ export class App {
     this.connectDB();
     this.bodyParser();
     this.logger();
+    this.configStatic();
     this.router();
   }
 
@@ -33,7 +35,13 @@ export class App {
     this.app.use(bodyParser.json({ type: 'application/json'}));
   }
 
+  private configStatic(): void {
+    Log.main.info(`Static Dir: ${__dirname}/../eventy/`);
+    this.app.use(express.static(`${__dirname}/../eventy/`));
+  }
+
   private router(): void {
+    this.app.use(indexRouter);
     this.app.use('/auth', authRouter);
     this.app.use('/event', eventRouter);
   }
@@ -41,9 +49,9 @@ export class App {
   public serve(): App {
     const port = process.env.port || 3333;
     const server = this.app.listen(port, () => {
-      Log.main.info(`Listening at http://localhost:${port}/api`);
+      Log.main.info(`Listening at http://localhost:${port}`);
     });
-    server.on('error', console.error);
+    server.on('error', Log.main.error);
     return this;
   }
 
